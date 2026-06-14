@@ -176,7 +176,9 @@ void JsonSerializer::addValue(const std::string &name, rapidjson::Value &&value)
     }
     else
     {
-        rapidjson::Value nameValue(name, mAllocator);
+        rapidjson::Value nameValue;
+        nameValue.SetString(name.c_str(), static_cast<rapidjson::SizeType>(name.length()), mAllocator);
+
         mDoc.AddMember(nameValue, std::move(value), mAllocator);
     }
 }
